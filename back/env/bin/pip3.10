@@ -1,4 +1,4 @@
-#!/home/prycom/projects/work-test/back/env/bin/python
+#!/home/prycom/projects/react-json-render/back/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
