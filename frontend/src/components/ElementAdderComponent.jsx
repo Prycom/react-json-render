@@ -1,7 +1,10 @@
 import { connect } from "react-redux";
 import { updateJson } from "../itemActions";
 import componentsDict, { componentsJsonDict } from "../utils";
+import Dropdown from "./Dropdown";
 
+
+/*
 const Dropdown = ({ label, value, options, onChange }) => {
     return (
         <label className='dropdown-select text-black'>
@@ -14,7 +17,7 @@ const Dropdown = ({ label, value, options, onChange }) => {
         </label>
     );
 };
-
+*/
 
 
 function ElementAdderComponent({jsonLayout, updateJson, path}) {

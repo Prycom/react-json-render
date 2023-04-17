@@ -6,6 +6,7 @@ import SberForm, { SberFormJson } from "./components/SberForm";
 import SelectComponent, { SelectComponentJson } from "./components/SelectComponent";
 import TextAreaComponent, { TextAreaComponentJson } from "./components/TextAreaComponent";
 import ElementAdderComponent, { ElementAdderComponentJson } from "./components/ElementAdderComponent";
+import EmptyComponent from "./components/EmptyComponent";
 
 const componentsDict = {
     'InputComponent': InputComponent,
@@ -16,6 +17,7 @@ const componentsDict = {
     'SelectComponent': SelectComponent,
     'TextAreaComponent': TextAreaComponent,
     'ElementAdderComponent': ElementAdderComponent,
+    'EmptyComponent': EmptyComponent
 }
 
 export const functionalComponentsDict = {
@@ -37,15 +39,6 @@ export const componentsJsonDict = {
 
 }
 
-export const applyJsonChange = (data, mods) => {
-    for (var path in mods) {
-      var k = data;
-      var steps = path.split('.');
-      var last = steps.pop();
-      steps.forEach(e => (k[e] = k[e] || {}) && (k = k[e]));
-      k[last] = mods[path];
-    }
-    return data
-  }
+
 
 export default componentsDict;

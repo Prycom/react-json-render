@@ -2,25 +2,65 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { getJson, updateJson } from "../itemActions";
+import { replaceAllObjKeys, replaceAllValues } from "../utils";
 import Component from "./Component";
+import Dropdown from "./Dropdown";
 import ElementAdderComponent from "./ElementAdderComponent";
+
+function renameComponentNames(obj, changableKey, oldValue, newValue) {
+    for (let [key, value] of Object.entries(obj)) {
+      if (typeof value === 'object') {
+        if (Array.isArray(value)) {
+          for (let i = 0; i < value.length; i++) {
+            renameComponentNames(value[i], changableKey, oldValue, newValue); // recursive call
+          }
+        } else {
+          renameComponentNames(value, changableKey, oldValue, newValue); // recursive call
+        }
+      } else {
+        if(key === changableKey){
+            console.log(1);
+            if(obj[key] === oldValue) obj[key] = newValue
+        }
+        //console.log(`${key}: ${value}`);
+      }
+    }
+    return obj
+  }
 
 function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
 
+    const [isEditing, setIsEditing] = useState('')
+
+
+
     useEffect(() => {
+        updateJson({
+            'componentName': 'ElementAdderComponent',
+            'props': {
+                'path': ''
+            }
+        })
         axios.get('http://localhost:5000/testProps').then((resp) => {
             const resp_data = resp.data
-            updateJson({
-                'componentName': 'ElementAdderComponent',
-                'props': {
-                    'path': ''
-                }
-            })
+            
             //updateJson(resp_data)
         })
     }, [])
 
-
+    useEffect(() => {
+        let jsonCopy = structuredClone(jsonLayout)
+        if(Object.keys(jsonCopy).length !== 0)
+        {    
+            if(isEditing === 'View'){
+                renameComponentNames(jsonCopy, 'componentName', 'ElementAdderComponent', 'EmptyComponent')
+            }else if( isEditing === 'Edit'){
+                renameComponentNames(jsonCopy, 'componentName', 'EmptyComponent', 'ElementAdderComponent')
+            }
+            console.log(jsonCopy);
+            updateJson(jsonCopy)
+        }
+    }, [isEditing])
 
     return (  
         <div className="flex flex-row h-screen w-screen bg-gray-300">
@@ -30,6 +70,7 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
             </div>
             <div className="templateRedactor flex flex-col justify-around items-center w-1/2 bg-gray-200 px-4 py-4">
                 {/*<Component componentName={'SberForm'} props={testProps} /> */}
+                <Dropdown label={'Режим'} options={['Edit', 'View']} onChange={(e) => {setIsEditing(e.target.value)}}/>
                 <Component {...jsonLayout}/>
 
             </div>
