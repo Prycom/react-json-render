@@ -1,0 +1,94 @@
+{
+    "testProps": {
+        "componentName": "SberForm",
+        "props": {
+            "formName": "Карточка сотрудника",
+            "innerComponents": [
+                {
+                    "componentName": "ColListComponent",
+                    "props": {
+                        "innerComponents": [
+                            {
+                                "componentName": "RowListComponent",
+                                "props": {
+                                    "innerComponents": [
+                                        {
+                                            "componentName": "InputComponent",
+                                            "props": {
+                                                "labelText": "Имя",
+                                                "placeholder": "Имя",
+                                                "value": "Горохов"
+                                            }
+                                        },
+                                        {
+                                            "componentName": "InputComponent",
+                                            "props": {
+                                                "labelText": "Фамилия",
+                                                "placeholder": "Фамилия"
+                                            }
+                                        },
+                                        {
+                                            "componentName": "InputComponent",
+                                            "props": {
+                                                "labelText": "Отчество",
+                                                "placeholder": "Отчество"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "componentName": "RowListComponent",
+                                "props": {
+                                    "innerComponents": [
+                                        {
+                                            "componentName": "SelectComponent",
+                                            "props": {
+                                                "options": ["Ну пока я не сделал мультиселект"],
+                                                "labelText": "Multiselect"
+                                            }
+                                        },
+                                        {
+                                            "componentName": "SelectComponent",
+                                            "props": {
+                                                "urlToData": "http://localhost:5000/select",
+                                                "labelText": "Выберите пол"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "componentName": "RowListComponent",
+                                "props": {
+                                    "innerComponents": [
+                                        {
+                                            "componentName": "TextAreaComponent",
+                                            "props": {
+                                                "labelText": "Характеристика сотрудника",
+                                                "placeholder": "Описание"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "componentName": "RowListComponent",
+                                "props": {
+                                    "innerComponents": [
+                                        {
+                                            "componentName": "ButtonComponent",
+                                            "props": {
+                                                "buttonText": "Отправить"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+}
