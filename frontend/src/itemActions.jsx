@@ -11,3 +11,11 @@ export const getJson = () => {
         type: 'GET_LAYOUT'
     }
 }
+
+
+export const updateEditableElement = (json) => {
+    return {
+        type: 'SET_EDITABLE',
+        payload: json
+    }
+}

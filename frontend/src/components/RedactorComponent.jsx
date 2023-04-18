@@ -6,6 +6,7 @@ import { replaceAllObjKeys, replaceAllValues } from "../utils";
 import Component from "./Component";
 import Dropdown from "./Dropdown";
 import ElementAdderComponent from "./ElementAdderComponent";
+import ElementPropertiesComponent from "./ElementPropertiesComponent";
 
 function renameComponentNames(obj, changableKey, oldValue, newValue) {
     for (let [key, value] of Object.entries(obj)) {
@@ -22,7 +23,6 @@ function renameComponentNames(obj, changableKey, oldValue, newValue) {
             console.log(1);
             if(obj[key] === oldValue) obj[key] = newValue
         }
-        //console.log(`${key}: ${value}`);
       }
     }
     return obj
@@ -43,7 +43,6 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
         })
         axios.get('http://localhost:5000/testProps').then((resp) => {
             const resp_data = resp.data
-            
             //updateJson(resp_data)
         })
     }, [])
@@ -57,7 +56,6 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
             }else if( isEditing === 'Edit'){
                 renameComponentNames(jsonCopy, 'componentName', 'EmptyComponent', 'ElementAdderComponent')
             }
-            console.log(jsonCopy);
             updateJson(jsonCopy)
         }
     }, [isEditing])
@@ -77,6 +75,7 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
             <div className="templateProps flex flex-col w-1/4 bg-gray-100">
                 <div className="elementProps h-1/2 bg-slate-300">
                     <h1>Свойства элемента</h1>
+                    <ElementPropertiesComponent />
                 </div>
                 <div className="layoutScheme h-1/2 bg-slate-400">
                     <h1>Схема формы</h1>

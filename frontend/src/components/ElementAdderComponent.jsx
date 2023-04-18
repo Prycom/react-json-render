@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { updateJson } from "../itemActions";
+import { updateEditableElement, updateJson } from "../itemActions";
 import componentsDict, { componentsJsonDict } from "../utils";
 import Dropdown from "./Dropdown";
 
@@ -20,7 +20,7 @@ const Dropdown = ({ label, value, options, onChange }) => {
 */
 
 
-function ElementAdderComponent({jsonLayout, updateJson, path}) {
+function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateEditableElement, path}) {
     
     const componentsList = Object.keys(componentsDict)
 
@@ -38,6 +38,7 @@ function ElementAdderComponent({jsonLayout, updateJson, path}) {
             }
             newJsonLayout = newComp
             updateJson(newJsonLayout)
+            updateEditableElement(newComp)
         }else{
             let newJsonLayout = structuredClone(jsonLayout)
             newComp['props']['path'] = path //новый компонент появляется по тому же пути что и старый 
@@ -96,12 +97,14 @@ function ElementAdderComponent({jsonLayout, updateJson, path}) {
 const mapStateToProps = (state) => {
     return {
         jsonLayout: state.jsonLayout,
+        editableElement: state.editableElement
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateJson: (json) => dispatch(updateJson(json))
+        updateJson: (json) => dispatch(updateJson(json)),
+        updateEditableElement: (json) => dispatch(updateEditableElement(json))
     }
 }
 

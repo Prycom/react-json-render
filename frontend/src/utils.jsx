@@ -7,6 +7,7 @@ import SelectComponent, { SelectComponentJson } from "./components/SelectCompone
 import TextAreaComponent, { TextAreaComponentJson } from "./components/TextAreaComponent";
 import ElementAdderComponent, { ElementAdderComponentJson } from "./components/ElementAdderComponent";
 import EmptyComponent from "./components/EmptyComponent";
+import ElementPropertiesComponent from "./components/ElementPropertiesComponent";
 
 const componentsDict = {
     'InputComponent': InputComponent,
@@ -17,7 +18,8 @@ const componentsDict = {
     'SelectComponent': SelectComponent,
     'TextAreaComponent': TextAreaComponent,
     'ElementAdderComponent': ElementAdderComponent,
-    'EmptyComponent': EmptyComponent
+    'EmptyComponent': EmptyComponent,
+    'ElementPropertiesComponent': ElementPropertiesComponent
 }
 
 export const functionalComponentsDict = {
