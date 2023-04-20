@@ -58,12 +58,14 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
         }
     }, [isEditing])
 
+
+
     return (  
         <div className="flex flex-row h-screen w-screen bg-gray-300">
             <div className="componentsLibrary w-1/4 bg-gray-100">
-                <h1>Библиотека компонентов</h1>
+                <h1>JSON layout</h1>
                 {/*<ElementAdderComponent /> */}
-                <textarea>{JSON.stringify(jsonLayout)}</textarea>
+                <textarea className="flex h-full w-full px-4 py-4 resize-none" value={JSON.stringify(jsonLayout)} disabled={true}></textarea>
             </div>
             <div className="templateRedactor flex flex-col justify-around items-center w-1/2 bg-gray-200 px-4 py-4">
                 {/*<Component componentName={'SberForm'} props={testProps} /> */}
