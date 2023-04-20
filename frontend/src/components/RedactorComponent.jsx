@@ -32,8 +32,6 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
 
     const [isEditing, setIsEditing] = useState('')
 
-
-
     useEffect(() => {
         updateJson({
             'componentName': 'ElementAdderComponent',
@@ -65,6 +63,7 @@ function RedactorComponent({jsonLayout, editableElement, updateJson, getJson}) {
             <div className="componentsLibrary w-1/4 bg-gray-100">
                 <h1>Библиотека компонентов</h1>
                 {/*<ElementAdderComponent /> */}
+                <textarea>{JSON.stringify(jsonLayout)}</textarea>
             </div>
             <div className="templateRedactor flex flex-col justify-around items-center w-1/2 bg-gray-200 px-4 py-4">
                 {/*<Component componentName={'SberForm'} props={testProps} /> */}

@@ -19,7 +19,6 @@ const componentsDict = {
     'TextAreaComponent': TextAreaComponent,
     'ElementAdderComponent': ElementAdderComponent,
     'EmptyComponent': EmptyComponent,
-    'ElementPropertiesComponent': ElementPropertiesComponent
 }
 
 export const functionalComponentsDict = {

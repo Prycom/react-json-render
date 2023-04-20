@@ -3,23 +3,6 @@ import { updateEditableElement, updateJson } from "../itemActions";
 import componentsDict, { componentsJsonDict } from "../utils";
 import Dropdown from "./Dropdown";
 
-
-/*
-const Dropdown = ({ label, value, options, onChange }) => {
-    return (
-        <label className='dropdown-select text-black'>
-            <h1>{label}</h1>
-            <select value={value} onChange={onChange}>
-                  {Array.from(options).map((opt) => (
-                    <option key={opt} value={opt} onClick={onChange}>{opt}</option>
-                  ))}
-              </select>
-        </label>
-    );
-};
-*/
-
-
 function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateEditableElement, path}) {
     
     const componentsList = Object.keys(componentsDict)
@@ -47,7 +30,7 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
                 const newPath = path + '.props.innerComponents.0'
                 let innerAdder = structuredClone(componentsJsonDict['ElementAdderComponent'])
                 innerAdder['props']['path'] = newPath
-                console.log(newComp);
+                //console.log(newComp);
                 newComp['props']['innerComponents'].push(innerAdder)
             }
 
@@ -82,6 +65,7 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
             
 
             updateJson(newJsonLayout)
+            updateEditableElement(newComp)
         }
 
     }
