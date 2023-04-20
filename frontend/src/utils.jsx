@@ -10,6 +10,7 @@ import EmptyComponent from "./components/EmptyComponent";
 import ElementPropertiesComponent from "./components/ElementPropertiesComponent";
 
 const componentsDict = {
+    'EmptyComponent': EmptyComponent,
     'InputComponent': InputComponent,
     'ButtonComponent': ButtonComponent,
     'RowListComponent': RowListComponent,
@@ -18,7 +19,6 @@ const componentsDict = {
     'SelectComponent': SelectComponent,
     'TextAreaComponent': TextAreaComponent,
     'ElementAdderComponent': ElementAdderComponent,
-    'EmptyComponent': EmptyComponent,
 }
 
 export const functionalComponentsDict = {
