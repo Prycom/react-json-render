@@ -3,9 +3,9 @@ import { useState } from "react";
 function InputComponent({labelText, placeholder, value, onChange}) {
     const [val, setVal] = useState(value)
 
-    function handleChange(event) {
+    function handleChange(event) { // return data from input if call
         setVal(event.target.value)
-        onChange({'labelText': labelText ,'value': event.target.value})
+        typeof(onChange) === 'function' ? onChange({'labelText': labelText ,'value': event.target.value}) : console.log('No input callback')
     } 
 
     return ( 

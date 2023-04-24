@@ -3,10 +3,11 @@ import { updateEditableElement, updateJson } from "../itemActions";
 import componentsDict, { componentsJsonDict } from "../utils";
 import Dropdown from "./Dropdown";
 
-function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateEditableElement, path}) {
+function ElementAdderComponent({jsonLayout, updateJson, updateEditableElement, path}) {
     
     const componentsList = Object.keys(componentsDict)
 
+    //create new choosed component + creating component adder if necessary
     const handleClick = (e) => {
         const newCompName = e.target.value
         const newComp = structuredClone(componentsJsonDict[newCompName])
@@ -15,7 +16,7 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
             let newJsonLayout = structuredClone(jsonLayout)
             if(newComp['props']['innerComponents']){
                 const newPath = 'props.innerComponents.0'
-                const newAdder = componentsJsonDict['ElementAdderComponent']
+                const newAdder = structuredClone(componentsJsonDict['ElementAdderComponent'])
                 newAdder['props']['path'] = newPath
                 newComp['props']['innerComponents'].push(newAdder)
             }
@@ -26,11 +27,10 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
             let newJsonLayout = structuredClone(jsonLayout)
             newComp['props']['path'] = path //новый компонент появляется по тому же пути что и старый 
             
-            if(newComp['props']['innerComponents']){ //adding innerAdder in new comps
+            if(newComp['props']['innerComponents']){ //adding inner adder in new comps
                 const newPath = path + '.props.innerComponents.0'
                 let innerAdder = structuredClone(componentsJsonDict['ElementAdderComponent'])
                 innerAdder['props']['path'] = newPath
-                //console.log(newComp);
                 newComp['props']['innerComponents'].push(innerAdder)
             }
 
@@ -38,7 +38,7 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
             const currentLevelAdder = structuredClone(componentsJsonDict['ElementAdderComponent'])
             let currentLevelAdderPath = ''
             const pathArr = path.split('.')
-            for (let i = 0; i < pathArr.length; i++) {
+            for (let i = 0; i < pathArr.length; i++) { //calculate path for current level
                 if(i == pathArr.length - 1){
                     var x = Number(pathArr[i])
                     x += 1
@@ -49,21 +49,21 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
             }
             currentLevelAdder['props']['path'] = currentLevelAdderPath
 
-
+            // replacing old adder with new component
             var obj2 = newJsonLayout
             for (let i = 0; i < pathArr.length - 1; i++) {
                 obj2 = obj2[pathArr[i]]
             }
             obj2[pathArr[pathArr.length - 1]] = newComp
 
-
+            // adding adder into current level
             let obj1 = newJsonLayout
             for (let i = 0; i < pathArr.length - 1; i++) {
                 obj1 = obj1[pathArr[i]]
             }
             obj1.push(currentLevelAdder)
             
-
+            // updating store
             updateJson(newJsonLayout)
             updateEditableElement(newComp)
         }
@@ -72,7 +72,6 @@ function ElementAdderComponent({jsonLayout, updateJson, editableElement, updateE
 
     return (  
         <div className="flex justify-around bg-cyan-300 px-2 py-2 rounded max-w-250">
-            <button className="px-2 py-2 bg-red-300" onClick={() => {console.log(path)}}>a</button>
             <Dropdown label={'Добавить элемент'} options={componentsList} onChange={handleClick}/>
         </div>
     );

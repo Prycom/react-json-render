@@ -28,8 +28,6 @@ function ElementPropertiesComponent ({editableElement, jsonLayout, updateJson, u
     })
 
     const saveChanges = (e) => {
-        //console.log(editableElement)
-        //console.log(changedProps)
         
         if(editableElement['props']){    
             const pathToElement = editableElement['props']['path']
@@ -44,7 +42,6 @@ function ElementPropertiesComponent ({editableElement, jsonLayout, updateJson, u
             obj = obj['props']
             obj = { ...obj, ...changedProps }
             
-            //newJsonLayout['props'] = obj
 
             var obj3 = newJsonLayout
             for (let i = 0; i < pathArr.length - 1; i++) {
@@ -55,7 +52,6 @@ function ElementPropertiesComponent ({editableElement, jsonLayout, updateJson, u
 
             obj3['props'] = obj
 
-            //console.log(newJsonLayout)
             updateJson(newJsonLayout)
 
             let obj2 = structuredClone(newJsonLayout)

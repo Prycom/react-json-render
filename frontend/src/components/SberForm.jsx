@@ -2,10 +2,12 @@ import Component from "./Component";
 
 function SberForm({formName, innerComponents}) {
     const innerObjects = []
-    innerComponents ? innerComponents.forEach(element => {
-        innerObjects.push(<Component componentName={element.componentName} props={element.props} />)
-    }) : console.log(innerComponents);
-    
+
+    if(innerComponents){
+        innerComponents.forEach(element => {
+            innerObjects.push(<Component componentName={element.componentName} props={element.props} />)})
+    }
+
     return (  
         <div className="sberForm flex flex-col w-600 max-h-800 bg-[#009000] rounded-md px-4 py-4 text-white">
             <div>
